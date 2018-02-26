@@ -50,7 +50,7 @@ public:
 	}
 };
 
-void search(Apple* arr, int _chose, int quantity)
+int search(Apple* arr, int _chose, int quantity)
 {
 	int i(0);
 	bool t = false;
@@ -74,11 +74,11 @@ void search(Apple* arr, int _chose, int quantity)
 				t = true;
 			}
 		}
-		if (t)
-		{
-			cout << endl << "Apple " << i << ": "
-				<< arr[i - 1].getMass() << "g " << endl;
-		}
+//		if (t)
+//		{
+//			cout << endl << "Apple " << i << ": "
+//				<< arr[i - 1].getMass() << "g " << endl;
+//		}
 		break;
 	case 2:
 		int chose;
@@ -93,11 +93,11 @@ void search(Apple* arr, int _chose, int quantity)
 				t = true;
 			}
 		}
-		if (t)
-		{
-			cout << endl << "Apple " << i << ": "
-				<< arr[i - 1].getTaste() << endl;
-		}
+//		if (t)
+//		{
+//			cout << endl << "Apple " << i << ": "
+//				<< arr[i - 1].getTaste() << endl;
+//		}
 		break;
 	case 3:
 		cout << endl << "Яблоко какого цвета искать?" << endl
@@ -111,15 +111,20 @@ void search(Apple* arr, int _chose, int quantity)
 				t = true;
 			}
 		}
-		if (t)
-		{
-			cout << endl << "Apple " << i << ": "
-				<< arr[i - 1].getColor() << endl;
-		}
+//		if (t)
+//		{
+//			cout << endl << "Apple " << i << ": "
+//				<< arr[i - 1].getColor() << endl;
+//		}
 		break;
 	}
-	if (!t)
-		cout << endl << "По заданным параметрам объекта не найдено." << endl;
+	if (t)
+		return i;
+	else
+		return 0;
+//	else
+//		return 0;
+//		cout << endl << "По заданным параметрам объекта не найдено." << endl;
 }
 
 void sorting(Apple* arr, int _chose, int quantity)
@@ -196,7 +201,7 @@ int main()
 			<< "2. Сортировка;" << endl
 			<< "3. Вывести массив." << endl << endl;
 		cin >> chose;
-
+		int temp;
 		switch (chose)
 		{
 		case 1:
@@ -206,7 +211,14 @@ int main()
 				<< "2. По вкусу;" << endl
 				<< "3. По цвету." << endl << endl;
 			cin >> chose;
-			search(apple, chose, amt);
+			temp = search(apple, chose, amt);
+			if (temp)
+				cout << endl<< "Apple " << temp << ": "
+				<< apple[temp-1].getMass() << "g, "
+				<< apple[temp-1].getTaste() << ", "
+				<< apple[temp-1].getColor() << endl;
+			else
+				cout << endl << "По заданным параметрам объекта не найдено." << endl;
 			break;
 		case 2:
 			system("cls");
