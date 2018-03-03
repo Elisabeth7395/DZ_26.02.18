@@ -21,7 +21,7 @@ private:
 	char* colors_str[2] = { "RED", "GREEN" };
 	char* tastes_str[2] = { "SWEET", "SOUR" };
 public:
-	void setApp(int _mass = 500, int _taste = 0, int _color = 0)
+	void setApp(int _mass = 0, int _taste = 0, int _color = 0)
 	{
 		mass = _mass;
 		taste = _taste;
@@ -50,10 +50,12 @@ public:
 	}
 };
 
-int search(Apple* arr, int _chose, int quantity)
+Apple search(Apple* arr, int _chose, int quantity)
 {
 	int i(0);
-	bool t = false;
+	bool t(0);
+	Apple apple;
+	apple.setApp();
 	switch (_chose)
 	{
 	case 1:
@@ -71,7 +73,8 @@ int search(Apple* arr, int _chose, int quantity)
 		{
 			if ((arr[i].getMass() <= max) && (arr[i].getMass() >= min))
 			{
-				t = true;
+				apple = arr[i];
+				t = 1;
 			}
 		}
 //		if (t)
@@ -90,7 +93,8 @@ int search(Apple* arr, int _chose, int quantity)
 		{
 			if (arr[i].getNumTaste() == chose - 1)
 			{
-				t = true;
+				apple = arr[i];
+				t = 1;
 			}
 		}
 //		if (t)
@@ -108,7 +112,8 @@ int search(Apple* arr, int _chose, int quantity)
 		{
 			if (arr[i].getNumColor() == chose - 1)
 			{
-				t = true;
+				apple = arr[i];
+				t = 1;
 			}
 		}
 //		if (t)
@@ -118,10 +123,7 @@ int search(Apple* arr, int _chose, int quantity)
 //		}
 		break;
 	}
-	if (t)
-		return i;
-	else
-		return 0;
+		return apple;
 //	else
 //		return 0;
 //		cout << endl << "По заданным параметрам объекта не найдено." << endl;
@@ -201,7 +203,7 @@ int main()
 			<< "2. Сортировка;" << endl
 			<< "3. Вывести массив." << endl << endl;
 		cin >> chose;
-		int temp;
+		Apple temp;
 		switch (chose)
 		{
 		case 1:
@@ -212,11 +214,11 @@ int main()
 				<< "3. По цвету." << endl << endl;
 			cin >> chose;
 			temp = search(apple, chose, amt);
-			if (temp)
-				cout << endl<< "Apple " << temp << ": "
-				<< apple[temp-1].getMass() << "g, "
-				<< apple[temp-1].getTaste() << ", "
-				<< apple[temp-1].getColor() << endl;
+			if (temp.getMass())
+				cout << endl<< "Apple: "
+				<< temp.getMass() << "g, "
+				<< temp.getTaste() << ", "
+				<< temp.getColor() << endl;
 			else
 				cout << endl << "По заданным параметрам объекта не найдено." << endl;
 			break;
