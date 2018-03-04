@@ -21,7 +21,14 @@ private:
 	char* colors_str[2] = { "RED", "GREEN" };
 	char* tastes_str[2] = { "SWEET", "SOUR" };
 public:
-	void setApp(int _mass = 0, int _taste = 0, int _color = 0)
+	Apple()
+	{
+		mass = 0;
+		taste = 0;
+		color = 0;
+	}
+
+	Apple(int _mass, int _taste, int _color)
 	{
 		mass = _mass;
 		taste = _taste;
@@ -55,7 +62,6 @@ Apple search(Apple* arr, int _chose, int quantity)
 	int i(0);
 	bool t(0);
 	Apple apple;
-	apple.setApp();
 	switch (_chose)
 	{
 	case 1:
@@ -192,8 +198,9 @@ int main()
 		m = rand() % 400 + 100;
 		t = rand() % 2;
 		c = rand() % 2;
-		apple[i].setApp(m, t, c);
+		apple[i] = Apple(m, t, c);
 	}
+
 	do
 	{
 		system("cls");
